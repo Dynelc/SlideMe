@@ -25,6 +25,14 @@ const Level1 = () => {
     }
   }, [displayOptions]);
 
+  const swap = (value1, value2) => {
+    let array = [...colorsOptions];
+    let temp = array[value1];
+    array[value1] = array[value2];
+    array[value2] = temp;
+    setColorsOptions(array);
+  };
+
   const colorSwap = (gestureName, gestureState, id) => {
     const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
     switch (gestureName) {
@@ -33,29 +41,69 @@ const Level1 = () => {
         console.log('swipe Up');
         switch (id) {
           case 0:
-            console.log('hello case 0');
-            let array = [...colorsOptions];
-            let temp = array[0];
-            array[0] = array[2];
-            array[2] = temp;
-            setColorsOptions(array);
+            swap(0, 2);
             break;
           case 1:
+            swap(1, 3);
             break;
           case 2:
+            swap(2, 0);
             break;
           case 3:
-            breaak;
+            swap(3, 1);
+            break;
         }
         break;
       case SWIPE_DOWN:
         console.log('swipe Down');
+        switch (id) {
+          case 0:
+            swap(0, 2);
+            break;
+          case 1:
+            swap(1, 3);
+            break;
+          case 2:
+            swap(2, 0);
+            break;
+          case 3:
+            swap(3, 1);
+            break;
+        }
         break;
       case SWIPE_LEFT:
         console.log('swipe Left');
+        switch (id) {
+          case 0:
+            swap(0, 1);
+            break;
+          case 1:
+            swap(1, 0);
+            break;
+          case 2:
+            swap(2, 3);
+            break;
+          case 3:
+            swap(3, 2);
+            break;
+        }
         break;
       case SWIPE_RIGHT:
         console.log('shipe Right');
+        switch (id) {
+          case 0:
+            swap(0, 1);
+            break;
+          case 1:
+            swap(1, 0);
+            break;
+          case 2:
+            swap(2, 3);
+            break;
+          case 3:
+            swap(3, 2);
+            break;
+        }
         break;
     }
   };
