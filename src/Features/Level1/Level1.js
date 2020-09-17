@@ -13,6 +13,7 @@ const Level1 = () => {
   const [displayOptions, setDisplayOptions] = useState(false);
 
   useEffect(() => {
+    arrayShuffle();
     setTimeout(() => {
       setLoading(false);
       setDisplayOptions(true);
@@ -24,6 +25,18 @@ const Level1 = () => {
       getColorsOptions();
     }
   }, [displayOptions]);
+
+  const arrayShuffle = (array) => {
+    array = [...Items];
+    let i = array.length - 1;
+    for (; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    setColors(array);
+  };
 
   const swap = (value1, value2) => {
     let array = [...colorsOptions];
@@ -37,7 +50,6 @@ const Level1 = () => {
     const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
     switch (gestureName) {
       case SWIPE_UP:
-        console.log(id);
         console.log('swipe Up');
         switch (id) {
           case 0:
@@ -121,41 +133,43 @@ const Level1 = () => {
   };
 
   const renderPattern = () => {
-    return (
-      <View style={{flex: 1}}>
-        <View style={styles.instructionContainer}>
-          <Text style={styles.instructionText}>
-            Remember The Pattern Shown Below
-          </Text>
-        </View>
-        <View style={styles.patternContainer}>
-          <View style={styles.colorBox}>
-            <View
-              style={[
-                styles.individualColor,
-                {backgroundColor: colors[0].value},
-              ]}></View>
-            <View
-              style={[
-                styles.individualColor,
-                {backgroundColor: colors[1].value},
-              ]}></View>
+    if (colors.length > 0) {
+      return (
+        <View style={{flex: 1}}>
+          <View style={styles.instructionContainer}>
+            <Text style={styles.instructionText}>
+              Remember The Pattern Shown Below
+            </Text>
           </View>
-          <View style={styles.colorBox}>
-            <View
-              style={[
-                styles.individualColor,
-                {backgroundColor: colors[2].value},
-              ]}></View>
-            <View
-              style={[
-                styles.individualColor,
-                {backgroundColor: colors[3].value},
-              ]}></View>
+          <View style={styles.patternContainer}>
+            <View style={styles.colorBox}>
+              <View
+                style={[
+                  styles.individualColor,
+                  {backgroundColor: colors[0].value},
+                ]}></View>
+              <View
+                style={[
+                  styles.individualColor,
+                  {backgroundColor: colors[1].value},
+                ]}></View>
+            </View>
+            <View style={styles.colorBox}>
+              <View
+                style={[
+                  styles.individualColor,
+                  {backgroundColor: colors[2].value},
+                ]}></View>
+              <View
+                style={[
+                  styles.individualColor,
+                  {backgroundColor: colors[3].value},
+                ]}></View>
+            </View>
           </View>
         </View>
-      </View>
-    );
+      );
+    }
   };
 
   const renderDisplayOptions = () => {
