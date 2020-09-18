@@ -1,16 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './Styles';
 import Colors from '../../Shared/Colors';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
-const Level1 = () => {
+const Level1 = (props) => {
+  const {navigation} = props;
   const Items = Colors.Colors;
   const [loading, setLoading] = useState(true);
   const [colors, setColors] = useState(Items);
   const [colorsOptions, setColorsOptions] = useState([]);
   const [displayOptions, setDisplayOptions] = useState(false);
+  const [score, setScore] = useState(0);
+  const [problem, setProblem] = useState(0);
+  const [life, setLife] = useState(3);
+  const myIcon = <Icon name="heart" style={styles.heartIcon} />;
+  let threshold = 3;
 
   useEffect(() => {
     arrayShuffle();
@@ -19,6 +26,23 @@ const Level1 = () => {
       setDisplayOptions(true);
     }, 3000);
   }, []);
+
+  useEffect(() => {
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      setProblem(0);
+      setScore(0);
+      setLife(3);
+      arrayShuffle();
+      setLoading(true);
+      setDisplayOptions(false);
+      setTimeout(() => {
+        setLoading(false);
+        setDisplayOptions(true);
+      }, 3000);
+    });
+
+    return unsubscribe;
+  }, [props.navigation]);
 
   useEffect(() => {
     if (displayOptions === true) {
@@ -132,6 +156,49 @@ const Level1 = () => {
     setColorsOptions(array);
   };
 
+  const checkAnswer = (colorsOptions) => {
+    let value = 0;
+    let lyf;
+    console.log(colors);
+    console.log(colorsOptions);
+    for (let i = 0; i < colorsOptions.length; i++) {
+      console.log(colors[i].id);
+      console.log(colorsOptions[i].id);
+      if (colors[i].id === colorsOptions[i].id) {
+        value = value + 1;
+      }
+    }
+
+    console.log(value);
+    if (value === 4) {
+      setScore(score + 1);
+    } else {
+      lyf = life - 1;
+      setLife(lyf);
+    }
+    if (lyf === 0) {
+      return navigation.navigate('FailedScreen', {threshold});
+    } else if (problem === 10) {
+      return navigation.navigate('SuccessScreen');
+    }
+    setProblem(problem + 1);
+    setDisplayOptions(false);
+    setLoading(true);
+    arrayShuffle();
+    setTimeout(() => {
+      setLoading(false);
+      setDisplayOptions(true);
+    }, 5000);
+  };
+
+  const renderIcon = () => {
+    let array = [];
+    for (let i = 0; i < life; i++) {
+      array.push(<View key={i}>{myIcon}</View>);
+    }
+    return array;
+  };
+
   const renderPattern = () => {
     if (colors.length > 0) {
       return (
@@ -176,12 +243,27 @@ const Level1 = () => {
     if (colorsOptions.length > 0) {
       return (
         <View style={{flex: 1}}>
+          {console.log(colors)}
+          <View style={styles.problemContainer}>
+            <Text style={styles.scoreText}>Problem:{problem}</Text>
+          </View>
+          <View style={styles.scoreContainer}>
+            <View>
+              <Text style={styles.scoreText}>Level1</Text>
+            </View>
+            <View style={styles.iconContainer}>
+              {/* <Text style={styles.iconText}>Life</Text> */}
+              {renderIcon()}
+            </View>
+            <View>
+              <Text style={styles.scoreText}>{score} Points</Text>
+            </View>
+          </View>
           <View style={styles.instructionContainer}>
             <Text style={styles.instructionText}>
               Slide The Color Box To Match The Pattern Shown Before.
             </Text>
           </View>
-          {console.log(colorsOptions)}
           <View style={styles.patternContainer}>
             <View style={styles.colorBox}>
               <GestureRecognizer
@@ -229,7 +311,9 @@ const Level1 = () => {
             </View>
           </View>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => checkAnswer(colorsOptions)}>
               <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
           </View>
