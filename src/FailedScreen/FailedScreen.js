@@ -5,6 +5,8 @@ import {styles} from '../StartScreen/styles';
 
 const FailedScreen = (props) => {
   const {navigation} = props;
+  const {level} = props.route.params;
+  const page = level === 1 ? 'Level1' : level === 2 ? 'Level2' : 'Level3';
   return (
     <View style={styles.mainView}>
       <SafeAreaView backgroundColor={'#92B6D4'} opacity={0.95} />
@@ -25,7 +27,7 @@ const FailedScreen = (props) => {
       <View style={styles.buttonBox}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Level1')}>
+          onPress={() => navigation.navigate(page)}>
           <Text style={styles.txt}>Try Again</Text>
         </TouchableOpacity>
       </View>

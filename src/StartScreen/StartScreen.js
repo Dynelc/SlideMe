@@ -34,7 +34,7 @@ const StartScreen = (props) => {
       <View style={styles.buttonBox}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Level2')}>
+          onPress={() => navigation.navigate('Level1')}>
           <Text style={styles.txt}>Play</Text>
         </TouchableOpacity>
       </View>

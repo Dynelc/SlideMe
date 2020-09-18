@@ -7,7 +7,7 @@ import Colors from '../../Shared/Colors';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
-const Level2 = (props) => {
+const Level3 = (props) => {
   const {navigation} = props;
   const Items = Colors.Colors;
   const [loading, setLoading] = useState(true);
@@ -77,22 +77,22 @@ const Level2 = (props) => {
         console.log('swipe Up');
         switch (id) {
           case 0:
-            swap(0, 3);
+            swap(0, 4);
             break;
           case 1:
-            swap(1, 4);
+            swap(1, 5);
             break;
           case 2:
-            swap(2, 5);
+            swap(2, 0);
             break;
           case 3:
-            swap(3, 0);
+            swap(3, 1);
             break;
           case 4:
-            swap(4, 1);
+            swap(4, 2);
             break;
           case 5:
-            swap(5, 2);
+            swap(5, 3);
             break;
         }
         break;
@@ -100,22 +100,22 @@ const Level2 = (props) => {
         console.log('swipe Down');
         switch (id) {
           case 0:
-            swap(0, 3);
+            swap(0, 2);
             break;
           case 1:
-            swap(1, 4);
+            swap(1, 3);
             break;
           case 2:
-            swap(2, 5);
+            swap(2, 4);
             break;
           case 3:
-            swap(3, 0);
+            swap(3, 5);
             break;
           case 4:
-            swap(4, 1);
+            swap(4, 0);
             break;
           case 5:
-            swap(5, 2);
+            swap(5, 1);
             break;
         }
         break;
@@ -123,19 +123,19 @@ const Level2 = (props) => {
         console.log('swipe Left');
         switch (id) {
           case 0:
-            swap(0, 2);
+            swap(0, 1);
             break;
           case 1:
             swap(1, 0);
             break;
           case 2:
-            swap(2, 1);
+            swap(2, 3);
             break;
           case 3:
-            swap(3, 5);
+            swap(3, 2);
             break;
           case 4:
-            swap(4, 3);
+            swap(4, 5);
             break;
           case 5:
             swap(5, 4);
@@ -149,19 +149,19 @@ const Level2 = (props) => {
             swap(0, 1);
             break;
           case 1:
-            swap(1, 2);
+            swap(1, 0);
             break;
           case 2:
-            swap(2, 0);
+            swap(2, 3);
             break;
           case 3:
-            swap(3, 4);
+            swap(3, 2);
             break;
           case 4:
             swap(4, 5);
             break;
           case 5:
-            swap(5, 3);
+            swap(5, 4);
             break;
         }
         break;
@@ -201,9 +201,9 @@ const Level2 = (props) => {
       setLife(lyf);
     }
     if (lyf === 0) {
-      return navigation.navigate('FailedScreen', {level: 2});
+      return navigation.navigate('FailedScreen', {level: 3});
     } else if (problem === 10) {
-      return navigation.navigate('SuccessScreen', {level: 2});
+      return navigation.navigate('SuccessScreen', {level: 3});
     }
     setProblem(problem + 1);
     setDisplayOptions(false);
@@ -254,18 +254,20 @@ const Level2 = (props) => {
                   styles.individualColor,
                   {backgroundColor: colors[1].value},
                 ]}></View>
-              <View
-                style={[
-                  styles.individualColor,
-                  {backgroundColor: colors[2].value},
-                ]}></View>
             </View>
             <View style={styles.colorBox}>
               <View
                 style={[
                   styles.individualColor,
+                  {backgroundColor: colors[2].value},
+                ]}></View>
+              <View
+                style={[
+                  styles.individualColor,
                   {backgroundColor: colors[3].value},
                 ]}></View>
+            </View>
+            <View style={styles.colorBox}>
               <View
                 style={[
                   styles.individualColor,
@@ -290,7 +292,7 @@ const Level2 = (props) => {
           {console.log(colors)}
           <View style={styles.scoreContainer}>
             <View style={styles.scoreBox}>
-              <Text style={styles.scoreText}>Level 2</Text>
+              <Text style={styles.scoreText}>Level 3</Text>
             </View>
             <View style={styles.iconContainer}>
               {/* <Text style={styles.iconText}>Life</Text> */}
@@ -340,6 +342,8 @@ const Level2 = (props) => {
                     {backgroundColor: colorsOptions[1].value},
                   ]}></View>
               </GestureRecognizer>
+            </View>
+            <View style={styles.colorBox}>
               <GestureRecognizer
                 onSwipe={(direction, colorsOptions) =>
                   colorSwap(direction, colorsOptions, (id = 2))
@@ -350,8 +354,6 @@ const Level2 = (props) => {
                     {backgroundColor: colorsOptions[2].value},
                   ]}></View>
               </GestureRecognizer>
-            </View>
-            <View style={styles.colorBox}>
               <GestureRecognizer
                 onSwipe={(direction, colorsOptions) =>
                   colorSwap(direction, colorsOptions, (id = 3))
@@ -362,6 +364,8 @@ const Level2 = (props) => {
                     {backgroundColor: colorsOptions[3].value},
                   ]}></View>
               </GestureRecognizer>
+            </View>
+            <View style={styles.colorBox}>
               <GestureRecognizer
                 onSwipe={(direction, colorsOptions) =>
                   colorSwap(direction, colorsOptions, (id = 4))
@@ -406,4 +410,4 @@ const Level2 = (props) => {
   );
 };
 
-export default Level2;
+export default Level3;

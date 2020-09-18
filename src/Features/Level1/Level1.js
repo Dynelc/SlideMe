@@ -177,7 +177,7 @@ const Level1 = (props) => {
       setLife(lyf);
     }
     if (lyf === 0) {
-      return navigation.navigate('FailedScreen');
+      return navigation.navigate('FailedScreen', {level: 1});
     } else if (problem === 10) {
       return navigation.navigate('SuccessScreen', {level: 1});
     }
