@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import Level1 from '../Features/Level1/Level1';
+import Level2 from '../Features/Level2/Level2';
 import StartScreen from '../StartScreen/StartScreen';
 import FailedScreen from '../FailedScreen/FailedScreen';
 import SuccessScreen from '../SuccessScreen/SuccessScreen';
@@ -22,6 +23,11 @@ export default function StackNavigator() {
         <Stack.Screen
           name="Level1"
           component={Level1}
+          options={{gestureEnabled: false}}
+        />
+        <Stack.Screen
+          name="Level2"
+          component={Level2}
           options={{gestureEnabled: false}}
         />
         <Stack.Screen
