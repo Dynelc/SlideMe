@@ -4,7 +4,9 @@ import {View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
 import LottieView from 'lottie-react-native';
 
 const SuccessScreen = (props) => {
+  const {level} = props.route.params;
   const {navigation} = props;
+  const nextpage = level === 1 ? 'Level2' : level === 2 ? 'Level3' : 'Level1';
 
   return (
     <View style={styles.mainView}>
@@ -13,21 +15,23 @@ const SuccessScreen = (props) => {
         <Text style={styles.headerText}>Congratulations</Text>
       </View>
       <View style={styles.instruction}>
-        <Text style={styles.instructiontext}>You Are A Map Genius</Text>
+        <Text style={styles.instructiontext}>
+          You have completed Level {level}.
+        </Text>
       </View>
-      {/* <View style={styles.animationBox}>
+      <View style={styles.animationBox}>
         <LottieView
-          source={require('../../assets/animation/success.json')}
+          source={require('../assets/animations/congratulations.json')}
           autoPlay
           loop
           style={styles.animation2}
         />
-      </View> */}
+      </View>
       <View style={styles.buttonBox}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('SelectionScreen')}>
-          <Text style={styles.txt}>Next</Text>
+          onPress={() => navigation.navigate(nextpage)}>
+          <Text style={styles.txt}>Next Level</Text>
         </TouchableOpacity>
       </View>
     </View>

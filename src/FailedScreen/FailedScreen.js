@@ -4,7 +4,6 @@ import LottieView from 'lottie-react-native';
 import {styles} from '../StartScreen/styles';
 
 const FailedScreen = (props) => {
-  const {threshold} = props.route.params;
   const {navigation} = props;
   return (
     <View style={styles.mainView}>
@@ -13,18 +12,16 @@ const FailedScreen = (props) => {
         <Text style={styles.headerText}>Sorry</Text>
       </View>
       <View style={styles.instruction}>
-        <Text style={styles.instructiontext}>
-          Your Answer Was Wrong For {threshold} times.
-        </Text>
+        <Text style={styles.instructiontext}>You Failed The Level.</Text>
       </View>
-      {/* <View style={styles.animationBox}>
+      <View style={styles.animationBox}>
         <LottieView
-          source={require('../../assets/animation/failed.json')}
+          source={require('../assets/animations/failed.json')}
           autoPlay
           loop
           style={styles.animation2}
         />
-      </View> */}
+      </View>
       <View style={styles.buttonBox}>
         <TouchableOpacity
           style={styles.button}

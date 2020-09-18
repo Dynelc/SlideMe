@@ -28,6 +28,7 @@ const StartScreen = (props) => {
         <Text style={styles.instructiontext}>
           Remember and guess the pattern.
         </Text>
+        <Text style={styles.instructiontext}>You got 3 life.</Text>
       </View>
 
       <View style={styles.buttonBox}>

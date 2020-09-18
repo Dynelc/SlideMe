@@ -55,7 +55,7 @@ export const styles = ScaledSheet.create({
     backgroundColor: '#fff',
     elevation: 4,
     height: '50@ms',
-    width: '100@ms',
+    width: '120@ms',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',

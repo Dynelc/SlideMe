@@ -8,15 +8,29 @@ const styles = ScaledSheet.create({
   headerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#333533',
-    marginTop: '5@ms',
+    marginTop: '20@ms',
     marginHorizontal: '5@ms',
   },
-  headerText: {
+  headerContainer1: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '5@ms',
+    backgroundColor: '#333533',
+  },
+  headerText1: {
     fontSize: '30@ms',
     color: 'white',
     padding: '5@ms',
     fontFamily: 'Fredericka the Great Regular',
+  },
+  headerText: {
+    fontSize: '30@ms',
+    color: 'white',
+    fontFamily: 'Fredericka the Great Regular',
+  },
+  subheaderText: {
+    fontSize: '16@ms',
+    color: 'white',
   },
   problemContainer: {
     margin: '20@ms',
@@ -25,8 +39,7 @@ const styles = ScaledSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#333533',
-    padding: '10@ms',
+    margin: '10@ms',
   },
   iconContainer: {
     flexDirection: 'row',
@@ -37,6 +50,14 @@ const styles = ScaledSheet.create({
     fontSize: '30@ms',
     paddingHorizontal: '5@ms',
     color: 'red',
+  },
+  scoreBox: {
+    justifyContent: 'center',
+    borderWidth: '1@ms',
+    borderColor: 'white',
+    width: '25%',
+    height: '40@ms',
+    borderRadius: '5@ms',
   },
   scoreText: {
     fontSize: '20@ms',
@@ -52,7 +73,12 @@ const styles = ScaledSheet.create({
     textAlign: 'center',
     color: 'white',
   },
-  patternContainer: {
+  patternContainerRender: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: '30@ms',
+  },
+  patternContainerDisplay: {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
@@ -80,6 +106,17 @@ const styles = ScaledSheet.create({
     textAlign: 'center',
     fontSize: '20@ms',
     color: 'white',
+  },
+  animation: {
+    height: '100@vs',
+    width: '100@vs',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  animationBox: {
+    marginVertical: '10@ms',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

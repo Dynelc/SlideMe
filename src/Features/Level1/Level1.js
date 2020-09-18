@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text} from 'react-native';
+import LottieView from 'lottie-react-native';
+import {View, Text, SafeAreaView} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './Styles';
 import Colors from '../../Shared/Colors';
@@ -14,22 +15,21 @@ const Level1 = (props) => {
   const [colorsOptions, setColorsOptions] = useState([]);
   const [displayOptions, setDisplayOptions] = useState(false);
   const [score, setScore] = useState(0);
-  const [problem, setProblem] = useState(0);
+  const [problem, setProblem] = useState(1);
   const [life, setLife] = useState(3);
   const myIcon = <Icon name="heart" style={styles.heartIcon} />;
-  let threshold = 3;
 
   useEffect(() => {
     arrayShuffle();
     setTimeout(() => {
       setLoading(false);
       setDisplayOptions(true);
-    }, 3000);
+    }, 5000);
   }, []);
 
   useEffect(() => {
     const unsubscribe = props.navigation.addListener('focus', () => {
-      setProblem(0);
+      setProblem(1);
       setScore(0);
       setLife(3);
       arrayShuffle();
@@ -38,7 +38,7 @@ const Level1 = (props) => {
       setTimeout(() => {
         setLoading(false);
         setDisplayOptions(true);
-      }, 3000);
+      }, 5000);
     });
 
     return unsubscribe;
@@ -177,9 +177,9 @@ const Level1 = (props) => {
       setLife(lyf);
     }
     if (lyf === 0) {
-      return navigation.navigate('FailedScreen', {threshold});
+      return navigation.navigate('FailedScreen');
     } else if (problem === 10) {
-      return navigation.navigate('SuccessScreen');
+      return navigation.navigate('SuccessScreen', {level: 1});
     }
     setProblem(problem + 1);
     setDisplayOptions(false);
@@ -203,12 +203,22 @@ const Level1 = (props) => {
     if (colors.length > 0) {
       return (
         <View style={{flex: 1}}>
+          <View style={styles.headerContainer1}>
+            <Text style={styles.headerText1}>SlideMe</Text>
+          </View>
+          <View style={styles.animationBox}>
+            <LottieView
+              source={require('../../assets/animations/time.json')}
+              autoPlay
+              loop
+              style={styles.animation}
+            />
+          </View>
           <View style={styles.instructionContainer}>
             <Text style={styles.instructionText}>
               Remember The Pattern Shown Below
             </Text>
-          </View>
-          <View style={styles.patternContainer}>
+            <View style={styles.patternContainerRender}></View>
             <View style={styles.colorBox}>
               <View
                 style={[
@@ -244,27 +254,37 @@ const Level1 = (props) => {
       return (
         <View style={{flex: 1}}>
           {console.log(colors)}
-          <View style={styles.problemContainer}>
-            <Text style={styles.scoreText}>Problem:{problem}</Text>
-          </View>
           <View style={styles.scoreContainer}>
-            <View>
-              <Text style={styles.scoreText}>Level1</Text>
+            <View style={styles.scoreBox}>
+              <Text style={styles.scoreText}>Level 1</Text>
             </View>
             <View style={styles.iconContainer}>
               {/* <Text style={styles.iconText}>Life</Text> */}
               {renderIcon()}
             </View>
-            <View>
+            <View style={styles.scoreBox}>
               <Text style={styles.scoreText}>{score} Points</Text>
             </View>
           </View>
+          <View style={styles.headerContainer}>
+            <Text style={styles.headerText}>SlideMe</Text>
+            <Text style={styles.subheaderText}>BrainGame</Text>
+          </View>
+          <View style={styles.problemContainer}>
+            <Text style={styles.scoreText}>Problem</Text>
+            <Text style={styles.scoreText}>{problem} | 10</Text>
+          </View>
+
           <View style={styles.instructionContainer}>
+            <Text style={styles.instructionText}>Slide The Color Box.</Text>
             <Text style={styles.instructionText}>
-              Slide The Color Box To Match The Pattern Shown Before.
+              Try To Match The Pattern Shown Before.
+            </Text>
+            <Text style={styles.instructionText}>
+              Click Next After Finished.
             </Text>
           </View>
-          <View style={styles.patternContainer}>
+          <View style={styles.patternContainerDisplay}>
             <View style={styles.colorBox}>
               <GestureRecognizer
                 onSwipe={(direction, colorsOptions) =>
@@ -324,9 +344,8 @@ const Level1 = (props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>SlideMe</Text>
-      </View>
+      <SafeAreaView backgroundColor={'#92B6D4'} opacity={0.95} />
+
       {loading ? renderPattern() : null}
       {displayOptions && renderDisplayOptions()}
     </View>
