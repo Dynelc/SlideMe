@@ -11,7 +11,7 @@ export const styles = ScaledSheet.create({
   headerText: {
     color: 'white',
     fontSize: '40@ms',
-    fontFamily: 'Fredericka the Great Regular',
+    fontFamily: 'Fontisto',
   },
   subheaderText: {
     fontSize: '16@ms',

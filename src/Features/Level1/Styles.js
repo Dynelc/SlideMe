@@ -21,12 +21,12 @@ const styles = ScaledSheet.create({
     fontSize: '30@ms',
     color: 'white',
     padding: '5@ms',
-    fontFamily: 'Fredericka the Great Regular',
+    fontFamily: 'Fontisto',
   },
   headerText: {
     fontSize: '30@ms',
     color: 'white',
-    fontFamily: 'Fredericka the Great Regular',
+    fontFamily: 'Fontisto',
   },
   subheaderText: {
     fontSize: '16@ms',
